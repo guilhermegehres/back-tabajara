@@ -27,13 +27,13 @@ public class Apartamento implements Serializable {
 	@OneToMany(mappedBy = "apartamento", fetch = FetchType.LAZY)
 	private List<Reserva> reserva;
 	
-	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy="apartamentos")
-	@JoinTable(name = "apartamento_opcionais", joinColumns = {
-			@JoinColumn(name = "apartamento_id", nullable = false, updatable = false) },
-			inverseJoinColumns = { 
-					@JoinColumn(name = "opcional_id",
-					nullable = false, updatable = false)
-			}
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	 @JoinTable(name = "apartamento_opcionais", joinColumns = {
+		@JoinColumn(name = "apartamento_id") },
+		inverseJoinColumns = { 
+			@JoinColumn(name = "opcional_id",
+			nullable = false, updatable = false)
+		}
 	)
 	private List<Opcional> opcionais;
 

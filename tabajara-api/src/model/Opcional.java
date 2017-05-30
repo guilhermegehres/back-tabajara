@@ -19,14 +19,7 @@ public class Opcional {
 	@Column(name="desc")
 	private String desc;
 
-	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy="opcionais")
-	@JoinTable(name = "apartamento_opcionais", joinColumns = {
-			@JoinColumn(name = "opcionais_id", nullable = false, updatable = false) },
-			inverseJoinColumns = { 
-					@JoinColumn(name = "apartamento_id",
-					nullable = false, updatable = false)
-			}
-	)
+	@ManyToMany(mappedBy="opcionais")
 	private List<Apartamento> apartamentos;
 
 	public Integer getId() {
