@@ -7,13 +7,16 @@ import java.util.List;
 import javax.persistence.*;
 
 @Entity
+@Table(name="apartamento")
+@NamedQueries({
+	@NamedQuery(name="Apartamento.findById", query="select a from Apartamento a where a.id = :id")
+})
 public class Apartamento implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
-	
 	
 	@Column(name = "tipo")
 	private String tipo;

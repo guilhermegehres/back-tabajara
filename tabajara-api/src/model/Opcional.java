@@ -16,7 +16,7 @@ public class Opcional {
 	@Column(name="nome")
 	private String nome;
 	
-	@Column(name="desc")
+	@Column(name="descricao")
 	private String desc;
 
 	@ManyToMany(mappedBy="opcionais")

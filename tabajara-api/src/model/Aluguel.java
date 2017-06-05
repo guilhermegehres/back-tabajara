@@ -20,12 +20,10 @@ public class Aluguel {
 	@Column(name = "valor")
 	private Double valor;
 	
-	@Column
 	@ManyToOne
 	@JoinColumn(name = "users_id")
 	private User user;
 	
-	@Column
 	@ManyToOne
 	@JoinColumn(name = "apartamento_id")
 	private Apartamento apartamento;
