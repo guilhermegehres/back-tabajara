@@ -13,6 +13,7 @@ import javax.ws.rs.core.MediaType;
 import com.google.gson.Gson;
 
 import dto.ApartamentoDTO;
+import dto.ReservaDTO;
 import model.Apartamento;
 import service.ApartamentoService;
 
@@ -27,15 +28,15 @@ import javax.ws.rs.PUT;
 @Path("/apartamento")
 @Produces({"application/json;charset=UTF-8"})
 //@Consumes(MediaType.APPLICATION_JSON)
-public class ApartmentoResource {
+public class ReservaResource {
 
 	@Inject
 	private ApartamentoService apService; 
 	
 	@GET
 	@Produces({ "application/json"})
-	public List<ApartamentoDTO> getApartamentos(){
-		List<ApartamentoDTO> aps = apService.getApartamentos();
+	public List<ReservaDTO> getApartamentos(){
+		List<ReservaDTO> aps = apService.getApartamentos();
 		return aps;
 		
 	}
@@ -45,7 +46,6 @@ public class ApartmentoResource {
 	@Path("/{id}")
 	public ApartamentoDTO getApartamento(@PathParam("id") String id){
 		ApartamentoDTO ap = apService.getApartamento(Integer.parseInt(id));
-		//return ap.
 		return ap;
 		
 	}
@@ -57,7 +57,7 @@ public class ApartmentoResource {
 		try{
 			Gson gson = new Gson();
 			Apartamento ap = gson.fromJson(jsonString, Apartamento.class);
-			ApartamentoDTO apReturn = new ApartamentoDTO(apService.create(ap));
+			ApartamentoDTO apReturn = apService.createApartamento(ap);
 			return gson.toJson(apReturn, ApartamentoDTO.class);
 		}catch(Exception e){
 			return e.getMessage();
@@ -74,7 +74,7 @@ public class ApartmentoResource {
 			Gson gson = new Gson();
 			Apartamento ap = gson.fromJson(jsonString, Apartamento.class);
 			ap.setId(Integer.parseInt(id));
-			ApartamentoDTO apReturn = new ApartamentoDTO(apService.editApartamento(ap));
+			ApartamentoDTO apReturn = apService.editApartamento(ap);
 			return gson.toJson(apReturn, ApartamentoDTO.class);
 		}catch(Exception e){
 			return e.getMessage();

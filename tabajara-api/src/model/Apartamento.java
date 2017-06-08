@@ -12,7 +12,7 @@ import dto.ApartamentoDTO;
 @Table(name="apartamento")
 @NamedQueries({
 	@NamedQuery(name="Apartamento.findById", query="select a from Apartamento a where a.id = :id"),
-	@NamedQuery(name="Apartamento.getAll", query="select a from Apartamento")
+	@NamedQuery(name="Apartamento.getAll", query="select a from Apartamento a")
 })
 public class Apartamento implements Serializable {
 	private static final long serialVersionUID = 1L;

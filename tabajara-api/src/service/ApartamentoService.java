@@ -14,7 +14,7 @@ import dto.ApartamentoDTO;
 import model.Apartamento;
 
 @RequestScoped
-public class ApartamentoService {
+public class ApartamentoService extends AbstractService<Apartamento> {
 
 	@Inject
 	private EntityManager em;
@@ -29,32 +29,17 @@ public class ApartamentoService {
 	
 	public List<ApartamentoDTO> getApartamentos(){
 		Query q = em.createNamedQuery("Apartamento.getAll");
-		List<ApartamentoDTO> aps = new ArrayList<ApartamentoDTO>();
-		aps.addAll((ArrayList)q.getResultList());
-		return aps; 
+		List<Apartamento> rows = q.getResultList();
+		List<ApartamentoDTO> result = new ArrayList<>(rows.size());
+		for (Apartamento row : rows) {
+		    result.add(new ApartamentoDTO(row));
+		}
+		return result; 
 	}
-	
-	@Transactional
-	public ApartamentoDTO createApartamento(Apartamento ap){
-		em.persist(ap);
-		return new ApartamentoDTO(ap);
-	}
-	
-	@Transactional
-	public ApartamentoDTO editApartamento(Apartamento ap){
-		em.merge(ap);
-		return new ApartamentoDTO(ap);
-	}
-	
-	@Transactional
-	public Boolean deleteApartamento(Apartamento ap){
-		em.remove(em.getReference(Apartamento.class, ap.getId()));
-		return true;
-	}
-	@Transactional
-	public Boolean deleteApartamento(Integer id){
-		em.remove(em.getReference(Apartamento.class, id));
-		return true;
+
+	@Override
+	public Class<Apartamento> myClass() {
+		return Apartamento.class;
 	}
 
 }
