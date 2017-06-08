@@ -6,6 +6,8 @@ import model.Apartamento;
 
 public class ApartamentoDTO {
 	
+	private Integer id;
+	
 	private String tipo;
 	
 	private Double valorDiaria;
@@ -17,6 +19,7 @@ public class ApartamentoDTO {
 	private List<OpcionalDTO> opcionais;
 	
 	public ApartamentoDTO(Apartamento ap) {
+		this.id = ap.getId();
 		this.tipo = ap.getTipo();
 		this.valorDiaria = ap.getValorDiaria();
 	}
@@ -59,6 +62,14 @@ public class ApartamentoDTO {
 
 	public void setOpcionais(List<OpcionalDTO> opcionais) {
 		this.opcionais = opcionais;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	

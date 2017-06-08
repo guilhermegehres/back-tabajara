@@ -6,10 +6,13 @@ import java.util.List;
 
 import javax.persistence.*;
 
+import dto.ApartamentoDTO;
+
 @Entity
 @Table(name="apartamento")
 @NamedQueries({
-	@NamedQuery(name="Apartamento.findById", query="select a from Apartamento a where a.id = :id")
+	@NamedQuery(name="Apartamento.findById", query="select a from Apartamento a where a.id = :id"),
+	@NamedQuery(name="Apartamento.getAll", query="select a from Apartamento")
 })
 public class Apartamento implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -24,10 +27,10 @@ public class Apartamento implements Serializable {
 	@Column(name="valor_diaria")
 	private Double valorDiaria;
 	
-	@OneToMany(mappedBy = "apartamento", fetch = FetchType.LAZY)
+	@OneToMany(cascade = {CascadeType.MERGE},mappedBy = "apartamento", fetch = FetchType.LAZY)
 	private List<Aluguel> alugueis;
 	
-	@OneToMany(mappedBy = "apartamento", fetch = FetchType.LAZY)
+	@OneToMany(cascade = {CascadeType.MERGE},mappedBy = "apartamento", fetch = FetchType.LAZY)
 	private List<Reserva> reserva;
 	
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
@@ -86,6 +89,11 @@ public class Apartamento implements Serializable {
 
 	public void setOpcionais(List<Opcional> opcionais) {
 		this.opcionais = opcionais;
+	}
+	
+	public void setFromDto(ApartamentoDTO apDto){
+		this.tipo = apDto.getTipo();
+		this.valorDiaria = apDto.getValorDiaria();
 	}
 	
 
