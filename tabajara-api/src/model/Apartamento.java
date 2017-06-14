@@ -14,7 +14,7 @@ import dto.ApartamentoDTO;
 	@NamedQuery(name="Apartamento.findById", query="select a from Apartamento a where a.id = :id"),
 	@NamedQuery(name="Apartamento.getAll", query="select a from Apartamento a")
 })
-public class Apartamento implements Serializable {
+public class Apartamento extends AbstractModel<Apartamento> implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@Id
@@ -27,12 +27,13 @@ public class Apartamento implements Serializable {
 	@Column(name="valor_diaria")
 	private Double valorDiaria;
 	
-	@OneToMany(cascade = {CascadeType.MERGE},mappedBy = "apartamento", fetch = FetchType.LAZY)
+	/*
+	@OneToMany(mappedBy = "apartamento", fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST})
 	private List<Aluguel> alugueis;
 	
-	@OneToMany(cascade = {CascadeType.MERGE},mappedBy = "apartamento", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "apartamento", fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST})
 	private List<Reserva> reserva;
-	
+	*/
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	 @JoinTable(name = "apartamento_opcionais", joinColumns = {
 		@JoinColumn(name = "apartamento_id") },
@@ -46,7 +47,8 @@ public class Apartamento implements Serializable {
 	public Integer getId() {
 		return id;
 	}
-
+	
+	@Override
 	public void setId(Integer id) {
 		this.id = id;
 	}
@@ -66,7 +68,7 @@ public class Apartamento implements Serializable {
 	public void setValorDiaria(Double valorDiaria) {
 		this.valorDiaria = valorDiaria;
 	}
-
+/*
 	public List<Aluguel> getAlugueis() {
 		return alugueis;
 	}
@@ -82,7 +84,7 @@ public class Apartamento implements Serializable {
 	public void setReserva(List<Reserva> reserva) {
 		this.reserva = reserva;
 	}
-
+*/
 	public List<Opcional> getOpcionais() {
 		return opcionais;
 	}
@@ -95,6 +97,5 @@ public class Apartamento implements Serializable {
 		this.tipo = apDto.getTipo();
 		this.valorDiaria = apDto.getValorDiaria();
 	}
-	
 
 }

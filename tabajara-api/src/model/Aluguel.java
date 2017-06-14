@@ -1,14 +1,22 @@
 package model;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "aluguel")
-public class Aluguel {
+@NamedQueries({
+	@NamedQuery(name="Aluguel.findById", query="select a from Aluguel a where a.id = :id"),
+	@NamedQuery(name="Aluguel.getAll", query="select a from Aluguel a")
+})
+public class Aluguel extends AbstractModel<Aluguel> implements Serializable{
+
+	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	
 	@Column(name="data_inicio")
@@ -20,11 +28,12 @@ public class Aluguel {
 	@Column(name = "valor")
 	private Double valor;
 	
-	@ManyToOne
+
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name = "users_id")
 	private User user;
 	
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name = "apartamento_id")
 	private Apartamento apartamento;
 
@@ -32,6 +41,7 @@ public class Aluguel {
 		return id;
 	}
 
+	@Override
 	public void setId(Integer id) {
 		this.id = id;
 	}
@@ -75,6 +85,6 @@ public class Aluguel {
 	public void setApartamento(Apartamento apartamento) {
 		this.apartamento = apartamento;
 	}
-	
+
 	
 }

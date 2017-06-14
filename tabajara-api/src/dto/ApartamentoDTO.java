@@ -4,7 +4,7 @@ import java.util.List;
 
 import model.Apartamento;
 
-public class ApartamentoDTO {
+public class ApartamentoDTO extends AbstractDTO<Apartamento> {
 	
 	private Integer id;
 	
@@ -18,7 +18,8 @@ public class ApartamentoDTO {
 	
 	private List<OpcionalDTO> opcionais;
 	
-	public ApartamentoDTO(Apartamento ap) {
+	@Override
+	public void setValues(Apartamento ap) {
 		this.id = ap.getId();
 		this.tipo = ap.getTipo();
 		this.valorDiaria = ap.getValorDiaria();
@@ -72,5 +73,4 @@ public class ApartamentoDTO {
 		this.id = id;
 	}
 
-	
 }

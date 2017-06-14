@@ -1,13 +1,22 @@
 package model;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.*;
 
 @Entity
-public class Reserva {
+@Table(name="reserva")
+@NamedQueries({
+	@NamedQuery(name="Reserva.findById", query="select r from Reserva r where r.id = :id"),
+	@NamedQuery(name="Reserva.getAll", query="select r from Reserva r")
+})
+public class Reserva extends AbstractModel<Reserva> implements Serializable{
+
+	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	
 	@Column(name="data_inicio")
@@ -19,11 +28,11 @@ public class Reserva {
 	@Column(name = "valor")
 	private Double valor;
 	
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name = "users_id")
 	private User user;
 	
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name = "apartamento_id")
 	private Apartamento apartamento;
 
@@ -31,6 +40,7 @@ public class Reserva {
 		return id;
 	}
 
+	@Override
 	public void setId(Integer id) {
 		this.id = id;
 	}

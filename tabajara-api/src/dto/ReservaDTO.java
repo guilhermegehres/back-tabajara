@@ -2,8 +2,12 @@ package dto;
 
 import java.util.Date;
 
-public class ReservaDTO {
+import model.Reserva;
 
+public class ReservaDTO extends AbstractDTO<Reserva>{
+
+	private Integer id;
+	
 	private Date dataInicio;
 	
 	private Date dataFim;
@@ -13,6 +17,14 @@ public class ReservaDTO {
 	private UserDTO user;
 	
 	private ApartamentoDTO apartamento;
+	
+	@Override
+	public void setValues(Reserva r){
+		this.id = r.getId();
+		this.dataInicio = r.getDataInicio();
+		this.dataFim = r.getDataFim();
+		this.valor = r.getValor();
+	}
 
 	public Date getDataInicio() {
 		return dataInicio;
@@ -52,6 +64,14 @@ public class ReservaDTO {
 
 	public void setApartamento(ApartamentoDTO apartamento) {
 		this.apartamento = apartamento;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 	
 }

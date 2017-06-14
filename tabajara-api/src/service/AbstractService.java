@@ -1,17 +1,24 @@
 package service;
 
+import java.util.List;
+
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 
+import model.AbstractModel;
 
 public abstract class AbstractService<T> {
-
+	
 	@Inject
 	private EntityManager em;
 
 	public abstract Class<T> myClass();
-
+	
+	public abstract T get(Integer id);
+	
+	public abstract List<T> getList();
+	
 	@Transactional
 	public T create(T model){
 		em.persist(model);
@@ -19,13 +26,13 @@ public abstract class AbstractService<T> {
 	}
 	
 	@Transactional
-	public T editApartamento(T model){
+	public AbstractModel<T> edit(AbstractModel<T> model){
 		em.merge(model);
 		return model;
 	}
 	
 	@Transactional
-	public Boolean deleteApartamento(Integer id){
+	public Boolean delete(Integer id){
 		em.remove(em.getReference(myClass(), id));
 		return true;
 	}

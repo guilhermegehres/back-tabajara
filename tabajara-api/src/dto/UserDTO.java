@@ -1,14 +1,35 @@
 package dto;
 
-public class UserDTO {
+import model.User;
 
+public class UserDTO extends AbstractDTO<User> {
+
+	private Integer id;
+	
 	private String nome;
 	
 	private String email;
 	
 	private String senha;
 	
-	private Integer Tipo;
+	private Integer tipo;
+	
+	@Override
+	public void setValues(User u) {
+		this.id = u.getId();
+		this.nome = u.getNome();
+		this.email = u.getEmail();
+		this.senha = u.getSenha();
+		this.tipo = u.getTipo();
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
 	public String getNome() {
 		return nome;
@@ -35,11 +56,11 @@ public class UserDTO {
 	}
 
 	public Integer getTipo() {
-		return Tipo;
+		return tipo;
 	}
 
 	public void setTipo(Integer tipo) {
-		Tipo = tipo;
+		this.tipo = tipo;
 	}
 
 }

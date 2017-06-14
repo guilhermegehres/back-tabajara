@@ -6,18 +6,23 @@ import javax.persistence.*;
 
 @Entity
 @Table(name="opcionais")
-public class Opcional {
+@NamedQueries({
+	@NamedQuery(name="Opcional.findById", query="select o from Opcional o where o.id = :id"),
+	@NamedQuery(name="Opcional.getAll", query="select o from Opcional o")
+})
+public class Opcional extends AbstractModel<Opcional> {
 	
 	
 	@Id
 	@Column(name="id")
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	
 	@Column(name="nome")
 	private String nome;
 	
 	@Column(name="descricao")
-	private String desc;
+	private String descricao;
 
 	@ManyToMany(mappedBy="opcionais")
 	private List<Apartamento> apartamentos;
@@ -26,6 +31,7 @@ public class Opcional {
 		return id;
 	}
 
+	@Override
 	public void setId(Integer id) {
 		this.id = id;
 	}
@@ -38,12 +44,12 @@ public class Opcional {
 		this.nome = nome;
 	}
 
-	public String getDesc() {
-		return desc;
+	public String getDescricao() {
+		return descricao;
 	}
 
-	public void setDesc(String desc) {
-		this.desc = desc;
+	public void setDescricao(String desc) {
+		this.descricao = desc;
 	}
 
 	public List<Apartamento> getApartamentos() {

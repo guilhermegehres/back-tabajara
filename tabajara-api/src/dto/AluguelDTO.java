@@ -1,18 +1,30 @@
 package dto;
 
 import java.util.Date;
+import model.Aluguel;
 
-public class AluguelDTO {
+public class AluguelDTO extends AbstractDTO<Aluguel>{
 
-	private Date dataInicio;
+
+	@Override
+	public void setValues(Aluguel a) {
+		this.id = a.getId();
+		this.dataInicio = a.getDataInicio();
+		this.dataFim = a.getDataFim();
+		this.valor = a.getValor();
+	}
+
+	public Integer id;
 	
-	private Date dataFim;
+	public Date dataInicio;
 	
-	private Double valor;
+	public Date dataFim;
 	
-	private UserDTO user;
+	public Double valor;
 	
-	private ApartamentoDTO apartamento;
+	public UserDTO user;
+	
+	public ApartamentoDTO apartamento;
 
 	public Date getDataInicio() {
 		return dataInicio;
@@ -53,6 +65,13 @@ public class AluguelDTO {
 	public void setApartamento(ApartamentoDTO apartamento) {
 		this.apartamento = apartamento;
 	}
-	
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
 	
 }

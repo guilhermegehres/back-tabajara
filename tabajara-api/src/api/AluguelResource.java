@@ -6,41 +6,41 @@ import java.util.List;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
 import dto.AbstractDTO;
-import dto.ReservaDTO;
-import model.Reserva;
+import dto.AluguelDTO;
+import model.Aluguel;
 import service.AbstractService;
-import service.ReservaService;
+import service.AluguelService;
 
 
 @RequestScoped
-@Path("/reserva")
+@Path("/aluguel")
 @Produces({"application/json;charset=UTF-8"})
-//@Consumes(MediaType.APPLICATION_JSON)
-public class ReservaResource extends AbstractResource<Reserva>{
+public class AluguelResource extends AbstractResource<Aluguel> {
+
 
 	@Inject
-	private ReservaService resService; 
-
-	@Override
-	public Class<Reserva> myClass() {
-		// TODO Auto-generated method stub
-		return Reserva.class;
-	}
-
-	@Override
-	public AbstractService<Reserva> myService() {
-		// TODO Auto-generated method stub
-		return resService;
-	}
-
-	@Override
-	public AbstractDTO<Reserva> myDto() {
-		// TODO Auto-generated method stub
-		return new ReservaDTO();
-	}
+	private AluguelService alService; 
 	
+	
+	@Override
+	public Class<Aluguel> myClass() {
+		// TODO Auto-generated method stub
+		return Aluguel.class;
+	}
+
+	@Override
+	public AbstractService<Aluguel> myService() {
+		// TODO Auto-generated method stub
+		return this.alService;
+	}
+
+	@Override
+	public AbstractDTO<Aluguel> myDto() {
+		// TODO Auto-generated method stub
+		return new AluguelDTO();
+	}
+
 }
