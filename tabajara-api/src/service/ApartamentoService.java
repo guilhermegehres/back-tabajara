@@ -1,5 +1,6 @@
 package service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
@@ -16,14 +17,22 @@ public class ApartamentoService extends AbstractService<Apartamento> {
 	private EntityManager em;
 	
 	public Apartamento get(Integer id){
-		Query q = em.createNamedQuery("Apartamento.findById");
-		q.setParameter("id", id);
-		return (Apartamento)q.getSingleResult(); 
+		try{
+			Query q = em.createNamedQuery("Apartamento.findById");
+			q.setParameter("id", id);
+			return (Apartamento)q.getSingleResult();
+		}catch(Exception e){
+			return new Apartamento();
+		}
 	}
 	
 	public List<Apartamento> getList(){
-		Query q = em.createNamedQuery("Apartamento.getAll");
-		return  q.getResultList(); 
+		try{
+			Query q = em.createNamedQuery("Apartamento.getAll");
+			return  q.getResultList();
+		}catch(Exception e){
+			return new ArrayList<Apartamento>();
+		}
 	}
 
 	@Override

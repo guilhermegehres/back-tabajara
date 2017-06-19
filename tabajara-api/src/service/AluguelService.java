@@ -1,5 +1,6 @@
 package service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
@@ -16,15 +17,23 @@ public class AluguelService extends AbstractService<Aluguel>{
 	
 	@Override
 	public Aluguel get(Integer id){
-		Query q = em.createNamedQuery("Aluguel.findById");
-		q.setParameter("id", id);
-		return (Aluguel)q.getSingleResult(); 
+		try{
+			Query q = em.createNamedQuery("Aluguel.findById");
+			q.setParameter("id", id);
+			return (Aluguel)q.getSingleResult();
+		}catch(Exception e){
+			return new Aluguel();
+		}
 	}
 	
 	@Override
 	public List<Aluguel> getList(){
-		Query q = em.createNamedQuery("Aluguel.getAll");
-		return q.getResultList(); 
+		try{
+			Query q = em.createNamedQuery("Aluguel.getAll");
+			return q.getResultList();
+		}catch(Exception e){
+			return new ArrayList<Aluguel>();
+		}
 	}
 	
 	@Override

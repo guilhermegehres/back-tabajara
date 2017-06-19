@@ -12,6 +12,8 @@ public class UserDTO extends AbstractDTO<User> {
 	
 	private String senha;
 	
+	private String token;
+	
 	private Integer tipo;
 	
 	@Override
@@ -21,6 +23,7 @@ public class UserDTO extends AbstractDTO<User> {
 		this.email = u.getEmail();
 		this.senha = u.getSenha();
 		this.tipo = u.getTipo();
+		this.token = u.getToken();
 	}
 
 	public Integer getId() {
@@ -63,4 +66,13 @@ public class UserDTO extends AbstractDTO<User> {
 		this.tipo = tipo;
 	}
 
+	public String getToken() {
+		return token;
+	}
+
+	public void setToken(String token) {
+		this.token = token;
+	}
+	
+	
 }

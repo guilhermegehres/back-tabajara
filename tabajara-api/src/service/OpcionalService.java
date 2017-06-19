@@ -1,5 +1,6 @@
 package service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
@@ -18,14 +19,22 @@ public class OpcionalService extends AbstractService<Opcional> {
 	//private List<ApartamentoDTO> apartamentos;
 	
 	public Opcional get(Integer id){
-		Query q = em.createNamedQuery("Opcional.findById");
-		q.setParameter("id", id);
-		return (Opcional)q.getSingleResult(); 
+		try{
+			Query q = em.createNamedQuery("Opcional.findById");
+			q.setParameter("id", id);
+			return (Opcional)q.getSingleResult();
+		}catch(Exception e){
+			return new Opcional();
+		}
 	}
 	
 	public List<Opcional> getList(){
-		Query q = em.createNamedQuery("Opcional.getAll");
-		return q.getResultList(); 
+		try{
+			Query q = em.createNamedQuery("Opcional.getAll");
+			return q.getResultList();
+		}catch(Exception e){
+			return new ArrayList<Opcional>();
+		}
 	}
 
 	@Override

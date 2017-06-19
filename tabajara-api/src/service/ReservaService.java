@@ -1,5 +1,6 @@
 package service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
@@ -18,14 +19,22 @@ public class ReservaService extends AbstractService<Reserva>{
 	//private List<ApartamentoDTO> apartamentos;
 	
 	public Reserva get(Integer id){
-		Query q = em.createNamedQuery("Reserva.findById");
-		q.setParameter("id", id);
-		return (Reserva)q.getSingleResult(); 
+		try{
+			Query q = em.createNamedQuery("Reserva.findById");
+			q.setParameter("id", id);
+			return (Reserva)q.getSingleResult();
+		}catch(Exception e){
+			return new Reserva();
+		}
 	}
 	
 	public List<Reserva> getList(){
-		Query q = em.createNamedQuery("Reserva.getAll");
-		return q.getResultList(); 
+		try{
+			Query q = em.createNamedQuery("Reserva.getAll");
+			return q.getResultList();
+		}catch(Exception e){
+			return new ArrayList<Reserva>();
+		}
 	}
 
 	@Override

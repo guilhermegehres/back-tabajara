@@ -3,6 +3,7 @@ package api;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -11,6 +12,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
 
 import com.google.gson.Gson;
 
@@ -26,13 +28,16 @@ public abstract class AbstractResource<T> {
 	
 	public abstract AbstractDTO<T> myDto();
 	
+	@Context
+    protected HttpServletRequest hsr;
+	
 	@GET
 	@Produces({ "application/json"})
 	@Path("/{id}")
 	public List<AbstractDTO<T>> get(@PathParam("id") String id){
 		AbstractDTO<T> dto = myDto();
 		dto.setValues(myService().get(Integer.parseInt(id)));
-		List gambiarra = new ArrayList<AbstractDTO<T>>();
+		List<AbstractDTO<T>> gambiarra = new ArrayList<AbstractDTO<T>>();
 		gambiarra.add(dto);
 		return gambiarra;
 	};
@@ -41,7 +46,7 @@ public abstract class AbstractResource<T> {
 	@Produces({ "application/json"})
 	public List<AbstractDTO<T>> getList(){
 		List<T> list = myService().getList();
-		List dtoList = new ArrayList<AbstractDTO<T>>();
+		List<AbstractDTO<T>> dtoList = new ArrayList<AbstractDTO<T>>();
 		for(int i = 0;i < list.size(); i++){
 			AbstractDTO<T> dtoToInsert = myDto();
 			dtoToInsert.setValues((T)list.get(i));

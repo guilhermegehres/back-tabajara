@@ -7,7 +7,9 @@ import javax.persistence.*;
 @Table(name = "users")
 @NamedQueries({
 	@NamedQuery(name="User.findById", query="select u from User u where u.id = :id"),
-	@NamedQuery(name="User.getAll", query="select u from User u")
+	@NamedQuery(name="User.getAll", query="select u from User u"),
+	@NamedQuery(name="User.getByLogin", query="select u from User u where u.email = :email and u.senha = :senha"),
+	@NamedQuery(name="User.getByEmail", query="select u from User u where u.email = :email")
 })
 public class User extends AbstractModel<User> implements Serializable{
 	private static final long serialVersionUID = 1L;
@@ -20,13 +22,16 @@ public class User extends AbstractModel<User> implements Serializable{
 	@Column(name="nome")
 	private String nome;
 	
+	@Column(name="token")
+	private String token;
+	
 	@Column(name="tipo")
 	private Integer tipo; 
 	
 	@Column(name="email")
 	private String email;
 	
-	@Column(name="password")
+	@Column(name="senha")
 	private String senha;
 
 	public int getId() {
@@ -60,6 +65,14 @@ public class User extends AbstractModel<User> implements Serializable{
 	}
 	public void setTipo(Integer tipo) {
 		this.tipo = tipo;
+	}
+
+	public String getToken() {
+		return token;
+	}
+
+	public void setToken(String token) {
+		this.token = token;
 	}
 	
 }

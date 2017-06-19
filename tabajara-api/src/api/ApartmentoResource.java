@@ -1,24 +1,14 @@
 package api;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
-import javax.ws.rs.GET;
 import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-
 import dto.AbstractDTO;
 import dto.ApartamentoDTO;
-import dto.ReservaDTO;
 import model.Apartamento;
-import model.Reserva;
 import service.AbstractService;
 import service.ApartamentoService;
-
-
 
 @RequestScoped
 @Path("/apartamento")
