@@ -28,11 +28,11 @@ public class Reserva extends AbstractModel<Reserva> implements Serializable{
 	@Column(name = "valor")
 	private Double valor;
 	
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name = "users_id")
 	private User user;
 	
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name = "apartamento_id")
 	private Apartamento apartamento;
 

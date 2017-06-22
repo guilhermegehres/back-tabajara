@@ -1,11 +1,13 @@
 package service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 
+import dto.AbstractDTO;
 import model.AbstractModel;
 
 public abstract class AbstractService<T> {
@@ -15,7 +17,7 @@ public abstract class AbstractService<T> {
 
 	public abstract Class<T> myClass();
 	
-	public abstract T get(Integer id);
+	public abstract AbstractDTO<T> get(Integer id);
 	
 	public abstract List<T> getList();
 	

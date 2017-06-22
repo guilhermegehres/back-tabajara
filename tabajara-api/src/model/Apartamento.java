@@ -34,7 +34,7 @@ public class Apartamento extends AbstractModel<Apartamento> implements Serializa
 	@OneToMany(mappedBy = "apartamento", fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST})
 	private List<Reserva> reserva;
 	*/
-	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	 @JoinTable(name = "apartamento_opcionais", joinColumns = {
 		@JoinColumn(name = "apartamento_id") },
 		inverseJoinColumns = { 

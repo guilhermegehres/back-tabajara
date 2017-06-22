@@ -35,10 +35,8 @@ public abstract class AbstractResource<T> {
 	@Produces({ "application/json"})
 	@Path("/{id}")
 	public List<AbstractDTO<T>> get(@PathParam("id") String id){
-		AbstractDTO<T> dto = myDto();
-		dto.setValues(myService().get(Integer.parseInt(id)));
 		List<AbstractDTO<T>> gambiarra = new ArrayList<AbstractDTO<T>>();
-		gambiarra.add(dto);
+		gambiarra.add(myService().get(Integer.parseInt(id)));
 		return gambiarra;
 	};
 	

@@ -11,6 +11,9 @@ import javax.persistence.Query;
 import javax.transaction.Transactional;
 import javax.xml.bind.DatatypeConverter;
 
+import dto.OpcionalDTO;
+import dto.UserDTO;
+import model.Opcional;
 import model.User;
 
 @RequestScoped
@@ -20,13 +23,16 @@ public class UserService extends AbstractService<User> {
 	private EntityManager em;
 
 	@Override
-	public User get(Integer id){
+	public UserDTO get(Integer id){
 		try{
 			Query q = em.createNamedQuery("User.findById");
 			q.setParameter("id", id);
-			return (User)q.getSingleResult();
+			User u = (User)q.getSingleResult();
+			UserDTO dto = new UserDTO();
+			dto.setValues(u);
+			return dto;
 		}catch(Exception e){
-			return new User();
+			return new UserDTO();
 		}
 	}
 	

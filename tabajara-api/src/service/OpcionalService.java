@@ -8,6 +8,9 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
+import dto.ApartamentoDTO;
+import dto.OpcionalDTO;
+import model.Apartamento;
 import model.Opcional;
 
 @RequestScoped
@@ -18,13 +21,16 @@ public class OpcionalService extends AbstractService<Opcional> {
 	
 	//private List<ApartamentoDTO> apartamentos;
 	
-	public Opcional get(Integer id){
+	public OpcionalDTO get(Integer id){
 		try{
 			Query q = em.createNamedQuery("Opcional.findById");
 			q.setParameter("id", id);
-			return (Opcional)q.getSingleResult();
+			Opcional o = (Opcional)q.getSingleResult();
+			OpcionalDTO dto = new OpcionalDTO();
+			dto.setValues(o);
+			return dto;
 		}catch(Exception e){
-			return new Opcional();
+			return new OpcionalDTO();
 		}
 	}
 	
