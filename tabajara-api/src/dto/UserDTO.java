@@ -1,5 +1,7 @@
 package dto;
 
+import java.util.List;
+
 import model.User;
 
 public class UserDTO extends AbstractDTO<User> {
@@ -15,6 +17,10 @@ public class UserDTO extends AbstractDTO<User> {
 	private String token;
 	
 	private Integer tipo;
+	
+	private List<AluguelDTO> alugueis;
+	
+	private List<ReservaDTO> reservas;
 	
 	@Override
 	public void setValues(User u) {
@@ -73,6 +79,21 @@ public class UserDTO extends AbstractDTO<User> {
 	public void setToken(String token) {
 		this.token = token;
 	}
-	
+
+	public List<AluguelDTO> getAlugueis() {
+		return alugueis;
+	}
+
+	public void setAlugueis(List<AluguelDTO> alugueis) {
+		this.alugueis = alugueis;
+	}
+
+	public List<ReservaDTO> getReservas() {
+		return reservas;
+	}
+
+	public void setReservas(List<ReservaDTO> reservas) {
+		this.reservas = reservas;
+	}
 	
 }

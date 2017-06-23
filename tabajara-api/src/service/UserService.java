@@ -11,9 +11,16 @@ import javax.persistence.Query;
 import javax.transaction.Transactional;
 import javax.xml.bind.DatatypeConverter;
 
+import dto.AbstractDTO;
+import dto.AluguelDTO;
+import dto.ApartamentoDTO;
 import dto.OpcionalDTO;
+import dto.ReservaDTO;
 import dto.UserDTO;
+import model.Aluguel;
+import model.Apartamento;
 import model.Opcional;
+import model.Reserva;
 import model.User;
 
 @RequestScoped
@@ -47,13 +54,44 @@ public class UserService extends AbstractService<User> {
 	}
 
 	@Override
-	public List<User> getList(){
-		try{
+	public List<AbstractDTO> getList(){
+		//try{
 			Query q = em.createNamedQuery("User.getAll");
-			return q.getResultList();
-		}catch(Exception e){
-			return new ArrayList<User>();
+			List<User> list = q.getResultList();
+			List<AbstractDTO> dtoList = new ArrayList<AbstractDTO>();
+			for(int i = 0;i < list.size(); i++){
+				User u = (User)list.get(i);
+				UserDTO dtoToInsert = new UserDTO();
+				//dtoToInsert = this.setAttrs(u.getAlugueis(), u.getReserva(), dtoToInsert);
+				dtoToInsert.setValues(u);
+				dtoList.add(dtoToInsert);
+			}
+			return dtoList;
+		//}catch(Exception e){
+		//	return new ArrayList<AbstractDTO>();
+		//}
+	}
+	
+	public UserDTO setAttrs(List<Aluguel> a, List<Reserva> r, UserDTO dto){
+		if(a != null && a.size() > 0){
+			List<AluguelDTO> listDto = new ArrayList<AluguelDTO>();
+			for(int i = 0;i < a.size(); i++){
+				AluguelDTO al = new AluguelDTO();
+				al.setValues(a.get(i));
+				listDto.add(al);
+			}
+			dto.setAlugueis(listDto);
 		}
+		if(r != null && r.size() > 0){
+			List<ReservaDTO> listDto = new ArrayList<ReservaDTO>();
+			for(int i = 0;i < r.size(); i++){
+				ReservaDTO al = new ReservaDTO();
+				al.setValues(r.get(i));
+				listDto.add(al);
+			}
+			dto.setReservas(listDto);
+		}
+		return dto;
 	}
 	
 	@Transactional

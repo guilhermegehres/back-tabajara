@@ -8,13 +8,12 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
+import dto.AbstractDTO;
 import dto.AluguelDTO;
 import dto.ApartamentoDTO;
-import dto.ReservaDTO;
 import dto.UserDTO;
 import model.Aluguel;
 import model.Apartamento;
-import model.Reserva;
 import model.User;
 
 @RequestScoped
@@ -39,12 +38,21 @@ public class AluguelService extends AbstractService<Aluguel>{
 	}
 	
 	@Override
-	public List<Aluguel> getList(){
+	public List<AbstractDTO> getList(){
 		try{
 			Query q = em.createNamedQuery("Aluguel.getAll");
-			return q.getResultList();
+			List<Aluguel> list = q.getResultList();
+			List<AbstractDTO> dtoList = new ArrayList<AbstractDTO>();
+			for(int i = 0;i < list.size(); i++){
+				Aluguel a = (Aluguel)list.get(i);
+				AluguelDTO dtoToInsert = new AluguelDTO();
+				dtoToInsert = this.setAttrs(a.getUser(), a.getApartamento(), dtoToInsert);
+				dtoToInsert.setValues(a);
+				dtoList.add(dtoToInsert);
+			}
+			return dtoList;
 		}catch(Exception e){
-			return new ArrayList<Aluguel>();
+			return new ArrayList<AbstractDTO>();
 		}
 	}
 	

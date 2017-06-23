@@ -42,15 +42,9 @@ public abstract class AbstractResource<T> {
 	
 	@GET
 	@Produces({ "application/json"})
-	public List<AbstractDTO<T>> getList(){
-		List<T> list = myService().getList();
-		List<AbstractDTO<T>> dtoList = new ArrayList<AbstractDTO<T>>();
-		for(int i = 0;i < list.size(); i++){
-			AbstractDTO<T> dtoToInsert = myDto();
-			dtoToInsert.setValues((T)list.get(i));
-			dtoList.add(dtoToInsert);
-		}
-		return dtoList;
+	public List<AbstractDTO> getList(){
+		List<AbstractDTO> list = myService().getList();
+		return list;
 	};
 	
 	@POST

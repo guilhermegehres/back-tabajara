@@ -38,19 +38,22 @@ public class ReservaService extends AbstractService<Reserva>{
 		}
 	}
 	
-	public List<Reserva> getList(){
+	@Override
+	public List<AbstractDTO> getList(){
 		try{
 			Query q = em.createNamedQuery("Reserva.getAll");
 			List<Reserva> list = q.getResultList();
-			List<ReservaDTO> dtoList = new ArrayList<ReservaDTO>();
+			List<AbstractDTO> dtoList = new ArrayList<AbstractDTO>();
 			for(int i = 0;i < list.size(); i++){
+				Reserva r = (Reserva)list.get(i);
 				ReservaDTO dtoToInsert = new ReservaDTO();
-				dtoToInsert.setValues((Reserva)list.get(i));
+				dtoToInsert = this.setAttrs(r.getUser(), r.getApartamento(), dtoToInsert);
+				dtoToInsert.setValues(r);
 				dtoList.add(dtoToInsert);
 			}
-			return q.getResultList();
+			return dtoList;
 		}catch(Exception e){
-			return new ArrayList<Reserva>();
+			return new ArrayList<AbstractDTO>();
 		}
 	}
 	
