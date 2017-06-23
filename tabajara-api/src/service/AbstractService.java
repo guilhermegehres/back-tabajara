@@ -8,6 +8,7 @@ import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 
 import dto.AbstractDTO;
+import dto.ReservaDTO;
 import model.AbstractModel;
 
 public abstract class AbstractService<T> {
@@ -19,7 +20,7 @@ public abstract class AbstractService<T> {
 	
 	public abstract AbstractDTO<T> get(Integer id);
 	
-	public abstract List<T> getList();
+	public abstract List<AbstractDTO> getList();
 	
 	@Transactional
 	public T create(T model){

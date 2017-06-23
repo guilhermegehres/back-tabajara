@@ -1,6 +1,8 @@
 package model;
 
 import java.io.Serializable;
+import java.util.List;
+
 import javax.persistence.*;
 
 @Entity
@@ -34,10 +36,13 @@ public class User extends AbstractModel<User> implements Serializable{
 	@Column(name="senha")
 	private String senha;
 
-	public int getId() {
-		return id;
-	}
-
+	/*
+	@OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST})
+	private List<Aluguel> alugueis;
+	
+	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST})
+	private List<Reserva> reserva;
+*/
 	@Override
 	public void setId(Integer id) {
 		this.id = id;
@@ -73,6 +78,26 @@ public class User extends AbstractModel<User> implements Serializable{
 
 	public void setToken(String token) {
 		this.token = token;
+	}
+	/*
+	public List<Aluguel> getAlugueis() {
+		return alugueis;
+	}
+
+	public void setAlugueis(List<Aluguel> alugueis) {
+		this.alugueis = alugueis;
+	}
+
+	public List<Reserva> getReserva() {
+		return reserva;
+	}
+
+	public void setReserva(List<Reserva> reserva) {
+		this.reserva = reserva;
+	}
+*/
+	public int getId() {
+		return id;
 	}
 	
 }
