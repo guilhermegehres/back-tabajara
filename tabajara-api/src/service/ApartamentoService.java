@@ -67,4 +67,10 @@ public class ApartamentoService extends AbstractService<Apartamento> {
 		return a;
 	}
 
+	@Override
+	public String validator(Apartamento t) {
+		// TODO Auto-generated method stub
+		return "";
+	}
+
 }

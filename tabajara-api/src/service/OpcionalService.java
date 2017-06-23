@@ -47,4 +47,10 @@ public class OpcionalService extends AbstractService<Opcional> {
 	public Class<Opcional> myClass() {
 		return Opcional.class;
 	}
+
+	@Override
+	public String validator(Opcional t) {
+		// TODO Auto-generated method stub
+		return "";
+	}
 }

@@ -92,5 +92,31 @@ public class UserService extends AbstractService<User> {
 		
 		return false;
 	}
+
+	@Override
+	public String validator(User t) {
+		// TODO Auto-generated method stub
+		List<User> usuarios = null;
+		try{
+		// validar se o usuario cm este email já existe
+		Query query = em.createNamedQuery("User.getByEmail"); 
+		query.setParameter("email", t.getEmail());
+		
+		
+		usuarios =  query.getResultList();
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			return "{\"msg\":\"Erro ao inserir\"}";
+		}
+		
+		if (usuarios.isEmpty()) {
+			return null;
+		} else{
+		
+		return "{\"msg\":\"Email já existe\"}";
+		}
+		
+	}
 	
 }

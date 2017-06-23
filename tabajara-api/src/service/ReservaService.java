@@ -74,4 +74,12 @@ public class ReservaService extends AbstractService<Reserva>{
 		return Reserva.class;
 	}
 
+	@Override
+	public String validator(Reserva t) {
+		// TODO Auto-generated method stub
+		// criar named query validando a data inicial e data final da reserva, nao pode existir nada entre elas para efetuar a reserva
+		
+		return "";
+	}
+
 }

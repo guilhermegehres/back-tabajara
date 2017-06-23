@@ -21,8 +21,12 @@ public abstract class AbstractService<T> {
 	
 	public abstract List<T> getList();
 	
+	public abstract String validator(T t);
+	
+	
 	@Transactional
 	public T create(T model){
+		
 		em.persist(model);
 		return model;
 	}

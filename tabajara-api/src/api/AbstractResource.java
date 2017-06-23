@@ -57,10 +57,18 @@ public abstract class AbstractResource<T> {
 	@Produces({ "application/json"})
 	@Consumes({ "application/json"})
 	public String store(String jsonString){
+		String msg=null;
 		try{
 			Gson gson = new Gson();
 			T model = gson.fromJson(jsonString, myClass());
+			//myService().validator(model);
+		msg   =	myService().validator(model);
+			if(msg==null){
+				
 			return gson.toJson(myService().create(model), myClass());
+			
+			}
+			return gson.toJson(msg);
 		}catch(Exception e){
 			return e.getMessage();
 		}
