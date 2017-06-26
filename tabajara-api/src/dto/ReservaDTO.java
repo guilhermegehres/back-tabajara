@@ -18,12 +18,15 @@ public class ReservaDTO extends AbstractDTO<Reserva>{
 	
 	private ApartamentoDTO apartamento;
 	
+	private Integer reservado;
+	
 	@Override
 	public void setValues(Reserva r){
 		this.id = r.getId();
 		this.dataInicio = r.getDataInicio();
 		this.dataFim = r.getDataFim();
 		this.valor = r.getValor();
+		this.reservado = r.getReservado();
 	}
 
 	public Date getDataInicio() {
@@ -72,6 +75,14 @@ public class ReservaDTO extends AbstractDTO<Reserva>{
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	public Integer getReservado() {
+		return reservado;
+	}
+
+	public void setReservado(Integer reservado) {
+		this.reservado = reservado;
 	}
 	
 }

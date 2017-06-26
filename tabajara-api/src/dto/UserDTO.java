@@ -2,6 +2,8 @@ package dto;
 
 import java.util.List;
 
+import javax.persistence.Column;
+
 import model.User;
 
 public class UserDTO extends AbstractDTO<User> {
@@ -22,6 +24,8 @@ public class UserDTO extends AbstractDTO<User> {
 	
 	private List<ReservaDTO> reservas;
 	
+	private Long cpf;
+	
 	@Override
 	public void setValues(User u) {
 		this.id = u.getId();
@@ -29,6 +33,7 @@ public class UserDTO extends AbstractDTO<User> {
 		this.email = u.getEmail();
 		this.senha = u.getSenha();
 		this.tipo = u.getTipo();
+		this.cpf = u.getCpf();
 		this.token = u.getToken();
 	}
 
@@ -94,6 +99,14 @@ public class UserDTO extends AbstractDTO<User> {
 
 	public void setReservas(List<ReservaDTO> reservas) {
 		this.reservas = reservas;
+	}
+	
+	public Long getCpf() {
+		return cpf;
+	}
+	
+	public void setCpf(Long cpf) {
+		this.cpf = cpf;
 	}
 	
 }

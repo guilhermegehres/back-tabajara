@@ -57,8 +57,8 @@ public class OpcionalService extends AbstractService<Opcional> {
 	}
 
 	@Override
-	public String validator(Opcional t) {
+	public OpcionalDTO validator(Opcional t) {
 		// TODO Auto-generated method stub
-		return "";
+		return null;
 	}
 }

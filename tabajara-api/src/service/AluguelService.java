@@ -78,11 +78,9 @@ public class AluguelService extends AbstractService<Aluguel>{
 	}
 
 	@Override
-	public String validator(Aluguel t) {
+	public AluguelDTO validator(Aluguel t) {
 		// TODO Auto-generated method stub
-		//
-		
-		return "";
+		return null;
 	}
 
 }

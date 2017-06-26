@@ -14,6 +14,7 @@ import javax.xml.bind.DatatypeConverter;
 import dto.AbstractDTO;
 import dto.AluguelDTO;
 import dto.ApartamentoDTO;
+import dto.MensagemDTO;
 import dto.OpcionalDTO;
 import dto.ReservaDTO;
 import dto.UserDTO;
@@ -132,27 +133,29 @@ public class UserService extends AbstractService<User> {
 	}
 
 	@Override
-	public String validator(User t) {
+	public AbstractDTO validator(User t) {
 		// TODO Auto-generated method stub
 		List<User> usuarios = null;
+		MensagemDTO msgDto = new MensagemDTO(); 
 		try{
-		// validar se o usuario cm este email já existe
-		Query query = em.createNamedQuery("User.getByEmail"); 
-		query.setParameter("email", t.getEmail());
-		
-		
-		usuarios =  query.getResultList();
+			// validar se o usuario cm este email já existe
+			Query query = em.createNamedQuery("User.getByEmail"); 
+			query.setParameter("email", t.getEmail());
+			usuarios =  query.getResultList();
 		}
 		catch (Exception e) {
 			e.printStackTrace();
-			return "{\"msg\":\"Erro ao inserir\"}";
+			msgDto.setErr("Erro Ao inserir");
+			msgDto.setSuccess(false);
+			return msgDto;
 		}
 		
-		if (usuarios.isEmpty()) {
+		if (usuarios.isEmpty() || usuarios == null) {
 			return null;
 		} else{
-		
-		return "{\"msg\":\"Email já existe\"}";
+			msgDto.setErr("Email já existe");
+			msgDto.setSuccess(false);
+			return msgDto;
 		}
 		
 	}

@@ -9,7 +9,8 @@ import javax.persistence.*;
 @Table(name="reserva")
 @NamedQueries({
 	@NamedQuery(name="Reserva.findById", query="select r from Reserva r where r.id = :id"),
-	@NamedQuery(name="Reserva.getAll", query="select r from Reserva r")
+	@NamedQuery(name="Reserva.getAll", query="select r from Reserva r"),
+	@NamedQuery(name="Reserva.getByUserName", query="select r from Reserva r where r.user.nome like :nome")
 })
 public class Reserva extends AbstractModel<Reserva> implements Serializable{
 
@@ -28,11 +29,14 @@ public class Reserva extends AbstractModel<Reserva> implements Serializable{
 	@Column(name = "valor")
 	private Double valor;
 	
-	@ManyToOne(fetch=FetchType.EAGER)
+	@Column(name = "reservado")
+	private Integer reservado;
+	
+	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.MERGE)
 	@JoinColumn(name = "users_id")
 	private User user;
 	
-	@ManyToOne(fetch=FetchType.EAGER)
+	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.MERGE)
 	@JoinColumn(name = "apartamento_id")
 	private Apartamento apartamento;
 
@@ -84,6 +88,16 @@ public class Reserva extends AbstractModel<Reserva> implements Serializable{
 	public void setApartamento(Apartamento apartamento) {
 		this.apartamento = apartamento;
 	}
+
+	public Integer getReservado() {
+		return reservado;
+	}
+
+	public void setReservado(Integer reservado) {
+		this.reservado = reservado;
+	}
+	
+	
 	
 
 	

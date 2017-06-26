@@ -80,9 +80,9 @@ public class ApartamentoService extends AbstractService<Apartamento> {
 	}
 
 	@Override
-	public String validator(Apartamento t) {
+	public ApartamentoDTO validator(Apartamento t) {
 		// TODO Auto-generated method stub
-		return "";
+		return null;
 	}
 
 }

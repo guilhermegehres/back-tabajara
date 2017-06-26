@@ -22,12 +22,11 @@ public abstract class AbstractService<T> {
 	
 	public abstract List<AbstractDTO> getList();
 	
-	public abstract String validator(T t);
+	public abstract AbstractDTO<T> validator(T t);
 	
 	
 	@Transactional
 	public T create(T model){
-		
 		em.persist(model);
 		return model;
 	}

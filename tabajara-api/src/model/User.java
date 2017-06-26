@@ -35,6 +35,9 @@ public class User extends AbstractModel<User> implements Serializable{
 	
 	@Column(name="senha")
 	private String senha;
+	
+	@Column(name="cpf")
+	private Long cpf;
 
 	/*
 	@OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST})
@@ -98,6 +101,14 @@ public class User extends AbstractModel<User> implements Serializable{
 */
 	public int getId() {
 		return id;
+	}
+	
+	public Long getCpf() {
+		return cpf;
+	}
+	
+	public void setCpf(Long cpf) {
+		this.cpf = cpf;
 	}
 	
 }

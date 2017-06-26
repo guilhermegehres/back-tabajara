@@ -17,6 +17,7 @@ import javax.ws.rs.core.Context;
 import com.google.gson.Gson;
 
 import dto.AbstractDTO;
+import dto.MensagemDTO;
 import model.AbstractModel;
 import service.AbstractService;
 
@@ -50,21 +51,24 @@ public abstract class AbstractResource<T> {
 	@POST
 	@Produces({ "application/json"})
 	@Consumes({ "application/json"})
-	public String store(String jsonString){
-		String msg=null;
+	public AbstractDTO store(String jsonString){
+		MensagemDTO msg = null;
 		try{
 			Gson gson = new Gson();
 			T model = gson.fromJson(jsonString, myClass());
-			//myService().validator(model);
-		msg   =	myService().validator(model);
-			if(msg==null){
-				
-			return gson.toJson(myService().create(model), myClass());
 			
+			msg = (MensagemDTO) myService().validator(model);
+			if(msg==null){
+				AbstractDTO dto = myDto();
+				dto.setValues(myService().create(model));
+				return dto;
 			}
-			return gson.toJson(msg);
+			return msg;
 		}catch(Exception e){
-			return e.getMessage();
+			msg = new MensagemDTO();
+			msg.setErr("Houve um erro");
+			msg.setSuccess(false);
+			return msg;
 		}
 	}
 	

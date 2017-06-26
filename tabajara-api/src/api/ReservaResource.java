@@ -1,10 +1,15 @@
 package api;
 
 
+import java.util.List;
+
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
+import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
+
 import dto.AbstractDTO;
 import dto.ReservaDTO;
 import model.Reserva;
@@ -25,6 +30,14 @@ public class ReservaResource extends AbstractResource<Reserva>{
 	public Class<Reserva> myClass() {
 		// TODO Auto-generated method stub
 		return Reserva.class;
+	}
+	
+	@GET
+	@Path("/search")
+	@Produces({ "application/json"})
+	public List<ReservaDTO> filter(@QueryParam("search")String query){
+		List<ReservaDTO> list = resService.getListSearch(query);
+		return list;
 	}
 
 	@Override
