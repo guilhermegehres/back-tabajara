@@ -24,9 +24,9 @@ public class AuthorizationFilter implements Filter {
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)throws IOException, ServletException {
 
-	    chain.doFilter(request, response);
+	   // chain.doFilter(request, response);
 
-	    /*
+	    
 		HttpServletRequest httpR = (HttpServletRequest) request;
 		
 		HttpServletResponse resp = (HttpServletResponse) response;
@@ -44,7 +44,7 @@ public class AuthorizationFilter implements Filter {
 			//converte o token do header pra binary e instancia uma nova string com esse binario
 			String token = new String(DatatypeConverter.parseBase64Binary(auth));
 			//da split na string que gerou gerando tokenheader[0] == email && tokenheadr[1] == segundos
-
+			
 			if(uService.validaToken(token)){
 				resp.setStatus(401);
 				resp.setContentType("application/json");
@@ -57,14 +57,14 @@ public class AuthorizationFilter implements Filter {
 			chain.doFilter(request, response);
 		}
 		catch(Exception e){
-			resp.setStatus(500);
+			/*resp.setStatus(500);
 			resp.setContentType("application/json");
 			resp.getWriter().write("{\"msg\" : \"token invalido\"}");
 			resp.getWriter().flush();
-			resp.getWriter().close();
+			resp.getWriter().close();*/
 
 		}
-		*/
+		
 	}
 
 	@Override

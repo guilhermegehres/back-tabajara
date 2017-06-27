@@ -23,6 +23,9 @@ public class ReservaService extends AbstractService<Reserva>{
 	@Inject
 	private EntityManager em;
 	
+	@Inject
+	private UserService uService;
+	
 	//private List<ApartamentoDTO> apartamentos;
 	
 	public ReservaDTO get(Integer id){
@@ -42,9 +45,18 @@ public class ReservaService extends AbstractService<Reserva>{
 	@Override
 	public List<AbstractDTO> getList(){
 		try{
-			Query q = em.createNamedQuery("Reserva.getAll");
+			Query q;
+			if(this.uService.getUser().getTipo() == 1){
+				q = em.createNamedQuery("Reserva.getAll");
+			}else{
+				q = em.createNamedQuery("Reserva.getAllByUser");
+				q.setParameter("id", this.uService.getUser().getId());
+			}
+			
 			List<Reserva> list = q.getResultList();
+			
 			List<AbstractDTO> dtoList = new ArrayList<AbstractDTO>();
+			
 			for(int i = 0;i < list.size(); i++){
 				Reserva r = (Reserva)list.get(i);
 				ReservaDTO dtoToInsert = new ReservaDTO();

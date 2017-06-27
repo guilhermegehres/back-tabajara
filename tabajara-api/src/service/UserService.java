@@ -29,6 +29,12 @@ public class UserService extends AbstractService<User> {
 
 	@Inject
 	private EntityManager em;
+	
+	private User u;
+	
+	public User getUser(){
+		return this.u;
+	}
 
 	@Override
 	public UserDTO get(Integer id){
@@ -122,9 +128,13 @@ public class UserService extends AbstractService<User> {
 	
 	public boolean validaToken(String token){
 		String[] tokenHeader = token.split(":");
-		User u = this.getByEmail(tokenHeader[0]);
+		
+		this.u = this.getByEmail(tokenHeader[0]);
+		
 		String tokenBd = new String(DatatypeConverter.parseBase64Binary(u.getToken()));
+		
 		String[] tokenBdFormatted = tokenBd.split(":");
+		
 		if(Long.parseLong(tokenBdFormatted[1]) > Long.parseLong(tokenHeader[1])){
 			return true;
 		}

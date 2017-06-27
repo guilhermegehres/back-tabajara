@@ -10,6 +10,7 @@ import javax.persistence.*;
 @NamedQueries({
 	@NamedQuery(name="Reserva.findById", query="select r from Reserva r where r.id = :id"),
 	@NamedQuery(name="Reserva.getAll", query="select r from Reserva r"),
+	@NamedQuery(name="Reserva.getAllByUser", query="select r from Reserva r where r.user.id = :id"),
 	@NamedQuery(name="Reserva.getByUserName", query="select r from Reserva r where r.user.nome like :nome")
 })
 public class Reserva extends AbstractModel<Reserva> implements Serializable{
