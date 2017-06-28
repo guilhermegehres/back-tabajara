@@ -11,7 +11,8 @@ import javax.persistence.*;
 	@NamedQuery(name="User.findById", query="select u from User u where u.id = :id"),
 	@NamedQuery(name="User.getAll", query="select u from User u"),
 	@NamedQuery(name="User.getByLogin", query="select u from User u where u.email = :email and u.senha = :senha"),
-	@NamedQuery(name="User.getByEmail", query="select u from User u where u.email = :email")
+	@NamedQuery(name="User.getByEmail", query="select u from User u where u.email = :email"),
+	@NamedQuery(name="User.getByUserName", query="select u from User u where u.nome like :nome")
 })
 public class User extends AbstractModel<User> implements Serializable{
 	private static final long serialVersionUID = 1L;

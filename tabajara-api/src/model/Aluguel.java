@@ -11,6 +11,7 @@ import javax.persistence.*;
 	@NamedQuery(name="Aluguel.findById", query="select a from Aluguel a where a.id = :id"),
 	@NamedQuery(name="Aluguel.getAllByUser", query="select a from Aluguel a where a.user.id = :id"),
 	@NamedQuery(name="Aluguel.getAll", query="select a from Aluguel a"),
+	@NamedQuery(name="Aluguel.getByUserName", query="select a from Aluguel a where a.user.nome like :nome")
 })
 public class Aluguel extends AbstractModel<Aluguel> implements Serializable{
 

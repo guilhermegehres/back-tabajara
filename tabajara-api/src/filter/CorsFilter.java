@@ -12,10 +12,6 @@ public class CorsFilter implements Filter {
 
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
-        
-        String vtnc = request.getHeader("Authorization");
-        
-        System.out.println("AQQQQ CARALho");
 
         HttpServletResponse resp = (HttpServletResponse) servletResponse;
         resp.addHeader("Access-Control-Allow-Origin","*");

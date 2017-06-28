@@ -79,6 +79,25 @@ public class UserService extends AbstractService<User> {
 		//}
 	}
 	
+	public List<UserDTO> getListSearch(String query){
+		try{
+			Query q = em.createNamedQuery("User.getByUserName");
+			q.setParameter("nome", "%" + query + "%");
+			List<User> list = q.getResultList();
+			List<UserDTO> dtoList = new ArrayList<UserDTO>();
+			for(int i = 0;i < list.size(); i++){
+				User r = (User)list.get(i);
+				UserDTO dtoToInsert = new UserDTO();
+				//dtoToInsert = this.setAttrs(r.ge);
+				dtoToInsert.setValues(r);
+				dtoList.add(dtoToInsert);
+			}
+			return dtoList;
+		}catch(Exception e){
+			return new ArrayList<UserDTO>();
+		}
+	}
+	
 	public UserDTO setAttrs(List<Aluguel> a, List<Reserva> r, UserDTO dto){
 		if(a != null && a.size() > 0){
 			List<AluguelDTO> listDto = new ArrayList<AluguelDTO>();

@@ -33,7 +33,8 @@ public class AuthorizationFilter implements Filter {
 		
 		String path = httpR.getRequestURI();
 		
-		if (path.startsWith("/tabajara-api/api/user/login")) {
+		
+		if (path.startsWith("/tabajara-api/api/user/login") || (path.startsWith("/tabajara-api/api/user") && httpR.getMethod() == "POST")) {
 		    chain.doFilter(request, response);
 		}
 		

@@ -1,13 +1,21 @@
 package api;
 
+import java.util.List;
+
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
+
 import com.google.gson.Gson;
 import dto.AbstractDTO;
+import dto.ReservaDTO;
 import dto.UserDTO;
 import model.User;
 import service.AbstractService;
@@ -50,6 +58,22 @@ public class UserResource extends AbstractResource<User>{
 		UserDTO dto = new UserDTO();
 		dto.setValues(userToken);
 		return dto;
+	}
+	
+	@GET
+	@Path("/search/")
+	@Produces({ "application/json"})
+	public List<UserDTO> filter(@QueryParam("search")String query){
+		List<UserDTO> list = uService.getListSearch(query);
+		return list;
+	}
+	
+	@DELETE
+	@Path("/dependencies/{id}")
+	@Produces({ "application/json"})
+	public String delete(@PathParam("id")String query){
+		List<UserDTO> list = uService.getListSearch(query);
+		return "{deletado com sucesso}";
 	}
 
 }

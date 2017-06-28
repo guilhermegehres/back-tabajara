@@ -11,9 +11,11 @@ import javax.persistence.Query;
 import dto.AbstractDTO;
 import dto.AluguelDTO;
 import dto.ApartamentoDTO;
+import dto.ReservaDTO;
 import dto.UserDTO;
 import model.Aluguel;
 import model.Apartamento;
+import model.Reserva;
 import model.User;
 
 @RequestScoped
@@ -65,6 +67,25 @@ public class AluguelService extends AbstractService<Aluguel>{
 			return dtoList;
 		}catch(Exception e){
 			return new ArrayList<AbstractDTO>();
+		}
+	}
+	
+	public List<AluguelDTO> getListSearch(String query){
+		try{
+			Query q = em.createNamedQuery("Aluguel.getByUserName");
+			q.setParameter("nome", "%" + query + "%");
+			List<Aluguel> list = q.getResultList();
+			List<AluguelDTO> dtoList = new ArrayList<AluguelDTO>();
+			for(int i = 0;i < list.size(); i++){
+				Aluguel r = (Aluguel)list.get(i);
+				AluguelDTO dtoToInsert = new AluguelDTO();
+				dtoToInsert = this.setAttrs(r.getUser(), r.getApartamento(), dtoToInsert);
+				dtoToInsert.setValues(r);
+				dtoList.add(dtoToInsert);
+			}
+			return dtoList;
+		}catch(Exception e){
+			return new ArrayList<AluguelDTO>();
 		}
 	}
 	
